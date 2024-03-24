@@ -73,7 +73,7 @@ export const EditTodo = () => {
                 <input type="text" name="title" value={todo.title} onChange={handleChange} />
             </div>
             <div>
-                <input type="text" name="title" value={todo.description} onChange={handleChange} />
+                <input type="text" name="description" value={todo.description} onChange={handleChange} />
             </div>
             <div>
                 <input type="submit" />
