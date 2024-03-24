@@ -25,7 +25,7 @@ const deleteTask = ({id, token}) => (dispatch) => {
 const updateTodo = ({id, payload, token}) =>(dispatch)=> {
     dispatch({type: types.GET_TASK_REQUEST});
 
-    return axios.delete(`${process.env.REACT_APP_BASE_URL}/todo/${id}`,payload, {headers:{'Authorization': `Bearer ${token}`}}).then(res => {
+    return axios.patch(`${process.env.REACT_APP_BASE_URL}/todo/${id}`,payload, {headers:{'Authorization': `Bearer ${token}`}}).then(res => {
         dispatch({type: types.UPDATE_TASK_SUCCESS})
     }).catch(err => {
         dispatch({type: types.GET_TASK_FAILURE});

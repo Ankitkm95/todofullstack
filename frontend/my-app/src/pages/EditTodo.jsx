@@ -55,9 +55,10 @@ export const EditTodo = () => {
     };
 
     const handleSubmit = (e) => {
-        e.preventDefaut();
+        e.preventDefault();
 
-        if(todo?.title && todo?.description && token && token){
+        if(todo?.title && todo?.description && token && id){
+            console.log({id, payload:todo, token})
             dispatch(updateTodo({id, payload: todo, token})).then(res => {
                 dispatch(getTasks).then(re => {
                     navigate("/");
