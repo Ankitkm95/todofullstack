@@ -49,7 +49,7 @@ export const EditTodo = () => {
     // console.log(todo);
 
     const handleChange = (e) => {
-        const {name, value} = todo;
+        const {name, value} = e.target;
 
         setTodo(prev => ({...prev, [name]: value}));
     };
