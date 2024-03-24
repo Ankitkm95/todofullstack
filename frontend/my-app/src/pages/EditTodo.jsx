@@ -1,7 +1,13 @@
-const { useEffect } = require("react");
-const { useSelector, useDispatch } = require("react-redux");
-const { useSearchParams, useNavigate } = require("react-router-dom");
-const { getTasks, updateTodo } = require("../redux/todoReducer/action");
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { getTasks, updateTodo } from "../redux/todoReducer/action";
+import { useEffect, useState } from "react";
+
+
+
+// const { useSearchParams, useNavigate } = require("react-router-dom");
+// const { getTasks, updateTodo } = require("../redux/todoReducer/action");
+
 
 const initState = {
     title:"",
@@ -9,13 +15,14 @@ const initState = {
 }
 
 export const EditTodo = () => {
-    const [todo, setTodo] = useEffect(initState)
-    const {id} = useSearchParams();
+    const [todo, setTodo] = useState(initState)
+    const {id} = useParams();
     const allTodo = useSelector(store => store.todoReducer.todos);
     const token = useSelector((store)=> {
         console.log(store);
         return store.authReducer?.token;
     });
+ 
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -25,17 +32,21 @@ export const EditTodo = () => {
             dispatch(getTasks)
         }
     }},[])
-
-
+    
 
     useEffect(()=>{
-        if(id){
+        if(id && allTodo.length){
             const tod = allTodo.find(el => el._id === id);
+            console.log("tod",tod);
             if(tod){
-                setTodo(tod);
+                setTodo({title: tod?.title || "", description: tod?.description || ""});
             }
         }
     },[id,allTodo])
+
+    // console.log(id)
+
+    // console.log(todo);
 
     const handleChange = (e) => {
         const {name, value} = todo;
@@ -62,7 +73,7 @@ export const EditTodo = () => {
                 <input type="text" name="title" value={todo.title} onChange={handleChange} />
             </div>
             <div>
-                <input type="text" name="title" value={todo.title} onChange={handleChange} />
+                <input type="text" name="title" value={todo.description} onChange={handleChange} />
             </div>
             <div>
                 <input type="submit" />

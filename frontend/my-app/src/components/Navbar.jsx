@@ -14,7 +14,6 @@ const Navbar = () => {
         <div className={styles.navbar}>
             <div>
                 <Link className={styles.navLink} to={"/"}>Todos</Link>
-                <Link className={styles.navLink} to="add">Add Todo</Link>
             </div>        
             <div>
                 {!isAuth && <Link className={styles.navLink} to={"/register"}>Register</Link>}

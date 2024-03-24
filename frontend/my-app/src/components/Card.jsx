@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { deleteTask, getTasks } from "../redux/todoReducer/action";
+import { useNavigate } from "react-router-dom";
 
 
 const Card = ({title, description, _id, userID}) => {
@@ -11,6 +12,7 @@ const Card = ({title, description, _id, userID}) => {
     const userId = useSelector(store => {
         return store.authReducer.userDetail["_id"];
     });
+    const navigate = useNavigate();
 
     const DeleteTodo = () => {
         if(_id && token){
@@ -26,7 +28,7 @@ const Card = ({title, description, _id, userID}) => {
                 <p>{description}</p>
             </div>
             <div>
-                <button disabled={userId !== userID}>EDIT</button>
+                <button disabled={userId !== userID} onClick={()=> navigate(`edit/${_id}`)}>EDIT</button>
                 <button disabled={userId !== userID} onClick={DeleteTodo}>DELETE</button>
             </div>
         </div>

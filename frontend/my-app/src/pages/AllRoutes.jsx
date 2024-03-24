@@ -13,7 +13,7 @@ const AllRoutes = () => {
             <Route path={"/login"} element={<Login />} />
             <Route path={"/register"} element={<Register />} />
             <Route path={"/"} element={<ReqAuth><Todos /></ReqAuth>} />
-            <Route path="/add" element={<ReqAuth><EditTodo /></ReqAuth>}/>
+            <Route path="/edit/:id" element={<ReqAuth><EditTodo /></ReqAuth>}/>
             <Route path="*" element={<h1>Page Not Found..</h1>} />
             
         </Routes>
